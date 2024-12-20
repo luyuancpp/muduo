@@ -137,7 +137,7 @@ void RpcChannel::onRpcMessage(const TcpConnectionPtr& conn,
             int64_t id = message.id();
             service->CallMethod(method, NULL, get_pointer(request), response,
                                 NewCallback(this, &RpcChannel::doneCallback, response, id));
-            error = NO_ERROR;
+            error = RPC_NO_ERROR;
           }
           else
           {

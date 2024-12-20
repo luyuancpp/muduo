@@ -6,6 +6,7 @@
 #include "muduo/base/FileUtil.h"
 #include "muduo/base/Logging.h"
 
+#include <algorithm>
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -16,8 +17,13 @@
 using namespace muduo;
 
 FileUtil::AppendFile::AppendFile(StringArg filename)
+#ifdef __linux__
   : fp_(::fopen(filename.c_str(), "ae")),  // 'e' for O_CLOEXEC
-    writtenBytes_(0)
+#endif // __linux__
+#ifdef WIN32
+	: fp_(::fopen(filename.c_str(), "a")),  // 'e' for O_CLOEXEC
+#endif // WIN32    
+	writtenBytes_(0)
 {
   assert(fp_);
   ::setbuffer(fp_, buffer_, sizeof buffer_);
@@ -129,7 +135,13 @@ int FileUtil::ReadSmallFile::readToString(int maxSize,
     while (content->size() < implicit_cast<size_t>(maxSize))
     {
       size_t toRead = std::min(implicit_cast<size_t>(maxSize) - content->size(), sizeof(buf_));
+#ifdef __linux__
       ssize_t n = ::read(fd_, buf_, toRead);
+#endif // __linux__
+#ifdef WIN32
+      ssize_t n = (::read(fd_, buf_, (unsigned int)toRead));
+#endif // WIN32
+
       if (n > 0)
       {
         content->append(buf_, n);
