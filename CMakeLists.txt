@@ -8,10 +8,10 @@ project(muduo C CXX)
 
 include(DownloadProject.cmake)
 
-download_third_party(boost https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.zip)
-download_third_party(googletest https://codeload.github.com/google/googletest/zip/master)
-download_third_party(protobuf https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protobuf-all-3.15.6.zip)
-download_third_party(zlib https://github.com/madler/zlib/archive/refs/tags/v1.2.11.zip)
+download_third_party(boost https://boostorg.jfrog.io/artifactory/main/release/1.87.0/source/boost_1_87_0.zip)
+download_third_party(googletest https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip)
+download_third_party(protobuf https://github.com/protocolbuffers/protobuf/archive/refs/tags/v29.2.zip)
+download_third_party(zlib https://github.com/madler/zlib/archive/refs/tags/v1.3.1.zip)
 
 # Prevent GoogleTest from overriding our compiler/linker options
 # when building with Visual Studio
@@ -63,10 +63,10 @@ else (MSVC)
   -Wwrite-strings
   -march=native
   -rdynamic
-  -std=c++11
+  -std=c++20
   -pthread 
   -lpthread 
-  --std=c++11 
+  --std=c++20 
   -D_GLIBCXX_USE_DEPRECATED=0
   )
   
