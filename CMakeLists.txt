@@ -8,10 +8,6 @@ project(muduo C CXX)
 
 include(DownloadProject.cmake)
 
-download_third_party(boost https://boostorg.jfrog.io/artifactory/main/release/1.87.0/source/boost_1_87_0.zip)
-download_third_party(googletest https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip)
-download_third_party(protobuf https://github.com/protocolbuffers/protobuf/archive/refs/tags/v29.2.zip)
-download_third_party(zlib https://github.com/madler/zlib/archive/refs/tags/v1.3.1.zip)
 
 # Prevent GoogleTest from overriding our compiler/linker options
 # when building with Visual Studio
@@ -98,7 +94,7 @@ string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
 message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
 
 add_subdirectory(googletest)
-add_subdirectory(protobuf/cmake)
+add_subdirectory(protobuf)
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(examples/protobuf)
