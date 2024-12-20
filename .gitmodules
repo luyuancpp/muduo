@@ -5,9 +5,6 @@
 [submodule "third_party/boost"]
 	path = third_party/boost
 	url = https://github.com/luyuancpp/boost.git
-[submodule "pkg/muduo_windows/src"]
-	path = pkg/muduo_windows/src
-	url = https://github.com/luyuancpp/muduo-cross-platform.git
 [submodule "third_party/zlib"]
 	path = third_party/zlib
 	url = https://github.com/madler/zlib.git
